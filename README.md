@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AdmitStrong
 
-## Getting Started
+AdmitStrong is a student-centered college admissions planning platform. The current MVP helps students and families understand the next step, why it matters, and which actions are most worth pursuing.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Supabase integration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project is set up to persist student data through Supabase when the environment variables are configured.
 
-## Learn More
+1. Create a Supabase project.
+2. Copy `.env.example` to `.env.local`.
+3. Add your project URL and keys.
+4. Run the SQL in `supabase/schema.sql` in the Supabase SQL editor.
 
-To learn more about Next.js, take a look at the following resources:
+Example:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cp .env.example .env.local
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Required values:
 
-## Deploy on Vercel
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The app currently saves profile data locally in the browser as a fallback if Supabase is not configured yet. Once those values are present, the dashboard form will post to the `/api/profile` route and store the submitted student information in the `student_profiles` table.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Student profile data captured
+
+The profile questionnaire currently gathers:
+
+- student name and email
+- grade level and school location
+- GPA and test scores
+- college and career goals
+- courses taken
+- clubs and extracurricular activities
+- volunteering, internships, and interests
+- strengths and financial planning considerations
+
+These fields feed the recommendation engine and future trajectory planning for academic, internship, volunteering, and summer opportunity suggestions.
+
+## Roadmap and future expansion
+
+The schema in `supabase/schema.sql` also includes a `student_trajectory_items` table so the platform can later track actions such as:
+
+- recommended courses
+- internship opportunities
+- volunteer commitments
+- summer programs
+- academic competitions
+- completed milestones
+
+This is the foundation for the next layer of personalized guidance and application-portfolio tracking.

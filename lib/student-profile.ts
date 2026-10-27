@@ -1,19 +1,28 @@
 export type StudentProfile = {
+  id?: string;
   name: string;
   email: string;
   gradeLevel: string;
+  schoolZip: string;
+  schoolState: string;
   gpa: string;
   satScore: string;
   actScore: string;
   targetMajor: string;
   schoolType: string;
   goals: string;
+  collegeGoals: string;
+  careerGoals: string;
+  coursesTaken: string;
+  clubsParticipating: string;
+  extracurriculars: string;
   interests: string;
   currentActivities: string;
   volunteerExperience: string;
   internships: string;
   strengths: string;
   financialNeed: string;
+  profileComplete?: boolean;
 };
 
 export type RecommendationAction = {
@@ -38,18 +47,26 @@ export const emptyStudentProfile: StudentProfile = {
   name: "",
   email: "",
   gradeLevel: "10th grade",
+  schoolZip: "",
+  schoolState: "",
   gpa: "3.5",
   satScore: "",
   actScore: "",
   targetMajor: "Computer Science",
   schoolType: "4-year university",
   goals: "I want to build a strong application profile and stay on track for college admissions.",
+  collegeGoals: "I want to find colleges where I can grow academically, contribute to campus life, and stay affordable.",
+  careerGoals: "I want to explore careers in STEM and build experience that helps me clarify my path.",
+  coursesTaken: "Algebra II, Biology, English II, World History, Computer Science",
+  clubsParticipating: "Robotics club, debate team, coding club",
+  extracurriculars: "School newspaper, mock trial, science fair, community tutoring",
   interests: "STEM, research, and problem solving",
   currentActivities: "Robotics club, debate team, coding projects",
   volunteerExperience: "Library volunteer, community tutoring",
   internships: "",
   strengths: "strong academics, leadership, curiosity",
   financialNeed: "I want to keep college choices realistic and affordable.",
+  profileComplete: false,
 };
 
 export function parseList(value: string | undefined | null): string[] {
@@ -121,7 +138,7 @@ export function generateRecommendation(profile: StudentProfile): RecommendationS
   const gpa = Number(profile.gpa || 0);
   const sat = Number(profile.satScore || 0);
   const act = Number(profile.actScore || 0);
-  const activities = parseList(profile.currentActivities).length;
+  const activities = parseList(profile.currentActivities).length || parseList(profile.clubsParticipating).length;
   const volunteering = parseList(profile.volunteerExperience).length;
   const internships = parseList(profile.internships).length;
 

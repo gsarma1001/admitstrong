@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   emptyStudentProfile,
   generateRecommendation,
@@ -16,24 +16,59 @@ export function StudentProfileForm() {
   const savedProfile = loadStudentProfile();
   const [form, setForm] = useState<StudentProfile>(savedProfile ?? emptyStudentProfile);
   const [savedAt, setSavedAt] = useState<string | null>(null);
-  const [recommendation, setRecommendation] = useState(() => generateRecommendation(savedProfile ?? emptyStudentProfile));
+  const [status, setStatus] = useState<{ type: "idle" | "saving" | "saved" | "error"; message: string }>({
+    type: "idle",
+    message: "",
+  });
+
+  const recommendation = useMemo(
+    () => generateRecommendation(form),
+    [form],
+  );
 
   const handleChange = (field: keyof StudentProfile, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const normalizedProfile = {
       ...form,
       name: form.name.trim() || "Student",
       email: form.email.trim() || "student@example.com",
+      profileComplete: true,
     };
 
     saveStudentProfile(normalizedProfile);
-    setRecommendation(generateRecommendation(normalizedProfile));
-    setSavedAt(new Date().toLocaleString());
+
+    try {
+      setStatus({ type: "saving", message: "Saving your profile..." });
+      const response = await fetch("/api/profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(normalizedProfile),
+      });
+
+      if (!response.ok) {
+        const data = (await response.json().catch(() => ({}))) as { error?: string };
+        throw new Error(data.error ?? "Profile could not be saved to the database.");
+      }
+
+      setStatus({ type: "saved", message: "Profile saved to your student record." });
+      setSavedAt(new Date().toLocaleString());
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Your local profile was saved, but the cloud record could not be updated.",
+      });
+      setSavedAt(new Date().toLocaleString());
+    }
   };
 
   return (
@@ -70,6 +105,16 @@ export function StudentProfileForm() {
           </label>
 
           <label className="block">
+            <span className="mb-2 block text-sm font-medium text-slate-700">School zip code</span>
+            <input value={form.schoolZip} onChange={(event) => handleChange("schoolZip", event.target.value)} className={fieldClass} placeholder="94105" />
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-sm font-medium text-slate-700">State</span>
+            <input value={form.schoolState} onChange={(event) => handleChange("schoolState", event.target.value)} className={fieldClass} placeholder="California" />
+          </label>
+
+          <label className="block">
             <span className="mb-2 block text-sm font-medium text-slate-700">GPA</span>
             <input value={form.gpa} onChange={(event) => handleChange("gpa", event.target.value)} className={fieldClass} placeholder="3.7" />
           </label>
@@ -102,6 +147,21 @@ export function StudentProfileForm() {
         </div>
 
         <label className="block">
+          <span className="mb-2 block text-sm font-medium text-slate-700">Courses already taken</span>
+          <textarea value={form.coursesTaken} onChange={(event) => handleChange("coursesTaken", event.target.value)} className={`${fieldClass} min-h-20`} placeholder="Algebra II, Biology, AP English Language, Computer Science" />
+        </label>
+
+        <label className="block">
+          <span className="mb-2 block text-sm font-medium text-slate-700">Clubs and organizations</span>
+          <textarea value={form.clubsParticipating} onChange={(event) => handleChange("clubsParticipating", event.target.value)} className={`${fieldClass} min-h-20`} placeholder="Robotics club, debate team, coding club" />
+        </label>
+
+        <label className="block">
+          <span className="mb-2 block text-sm font-medium text-slate-700">Extra-curricular activities inside and outside school</span>
+          <textarea value={form.extracurriculars} onChange={(event) => handleChange("extracurriculars", event.target.value)} className={`${fieldClass} min-h-24`} placeholder="Science fairs, volunteering, youth leadership, weekend workshops" />
+        </label>
+
+        <label className="block">
           <span className="mb-2 block text-sm font-medium text-slate-700">Top interests</span>
           <input value={form.interests} onChange={(event) => handleChange("interests", event.target.value)} className={fieldClass} placeholder="STEM, research, and problem solving" />
         </label>
@@ -112,8 +172,18 @@ export function StudentProfileForm() {
         </label>
 
         <label className="block">
+          <span className="mb-2 block text-sm font-medium text-slate-700">College goals</span>
+          <textarea value={form.collegeGoals} onChange={(event) => handleChange("collegeGoals", event.target.value)} className={`${fieldClass} min-h-20`} placeholder="I want a strong academic environment with research opportunities and affordable pathways." />
+        </label>
+
+        <label className="block">
+          <span className="mb-2 block text-sm font-medium text-slate-700">Career goals</span>
+          <textarea value={form.careerGoals} onChange={(event) => handleChange("careerGoals", event.target.value)} className={`${fieldClass} min-h-20`} placeholder="I am exploring engineering, computer science, and product design roles." />
+        </label>
+
+        <label className="block">
           <span className="mb-2 block text-sm font-medium text-slate-700">Current activities</span>
-          <textarea value={form.currentActivities} onChange={(event) => handleChange("currentActivities", event.target.value)} className={`${fieldClass} min-h-24`} placeholder="Robotics club, coding projects, debate team" />
+          <textarea value={form.currentActivities} onChange={(event) => handleChange("currentActivities", event.target.value)} className={`${fieldClass} min-h-24`} placeholder="Robotics club, debate team, coding projects" />
         </label>
 
         <label className="block">
@@ -143,6 +213,12 @@ export function StudentProfileForm() {
 
           {savedAt ? <span className="text-xs text-slate-500">Saved {savedAt}</span> : null}
         </div>
+
+        {status.message ? (
+          <div className={status.type === "error" ? "rounded-2xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700" : "rounded-2xl border border-sky-200 bg-sky-50 p-3 text-sm text-sky-700"}>
+            {status.message}
+          </div>
+        ) : null}
       </form>
 
       <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6 shadow-[0_20px_55px_rgba(15,23,42,0.04)] sm:p-8">
