@@ -1,4 +1,53 @@
-﻿export function RoadmapPreview() {
+"use client";
+
+import { useEffect, useState } from "react";
+import { LoginForm } from "@/components/auth/login-form";
+import { loadSession } from "@/lib/student-profile";
+
+export function RoadmapPreview() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setIsAuthenticated(Boolean(loadSession()));
+  }, []);
+
+  if (isAuthenticated === null) {
+    return (
+      <div className="relative mx-auto w-full max-w-xl animate-pulse">
+        <div className="relative rounded-[2rem] border border-border bg-surface p-4 shadow-floating">
+          <div className="h-[420px] rounded-[1.5rem] bg-slate-100" />
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="relative mx-auto w-full max-w-xl">
+        <div className="absolute -left-8 top-20 h-32 w-32 rounded-full bg-[#f6dfb3] opacity-50 blur-3xl" />
+        <div className="absolute -right-10 bottom-12 h-40 w-40 rounded-full bg-[#cfe7f6] opacity-70 blur-3xl" />
+        <div className="relative rounded-[2rem] border border-border bg-surface p-4 shadow-floating">
+          <div className="rounded-[1.5rem] bg-surface-soft p-4 sm:p-5">
+            <div className="mb-4 flex items-center gap-3">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#dcebf5] text-sm font-semibold text-[#315b7f]">
+                A
+              </span>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  My Roadmap
+                </p>
+                <p className="text-sm font-medium text-slate-700">
+                  Sign in to personalize your plan
+                </p>
+              </div>
+            </div>
+            <LoginForm compact />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative mx-auto w-full max-w-xl">
       <div className="absolute -left-8 top-20 h-32 w-32 rounded-full bg-[#f6dfb3] opacity-50 blur-3xl" />
@@ -13,16 +62,16 @@
               </p>
 
               <h2 className="mt-2 text-2xl font-semibold text-primary">
-                Good afternoon, Maya
+                Welcome back
               </h2>
 
               <p className="mt-1 text-sm text-muted-foreground">
-                You&apos;re making meaningful progress.
+                Your plan is ready to keep moving.
               </p>
             </div>
 
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#dcebf5] font-semibold text-[#315b7f]">
-              M
+              {loadSession()?.name?.charAt(0)?.toUpperCase() ?? "S"}
             </div>
           </div>
 

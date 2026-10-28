@@ -1,25 +1,114 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbfcfe;
-  --foreground: #243247;
-
+  /*
+   * Core brand palette
+   * These values come directly from the approved AdmitStrong Brand Guide.
+   */
   --brand-navy: #1e3a5f;
   --brand-blue: #4f7cac;
   --brand-sky: #eaf3fa;
   --brand-gold: #e9ad45;
   --brand-green: #4f8a72;
 
+  /*
+   * Semantic colors
+   * Components should prefer these names because they describe purpose,
+   * not merely the underlying color.
+   */
+  --background: #fbfcfe;
+  --foreground: #243247;
+
   --surface: #ffffff;
   --surface-soft: #f4f7fb;
+  --surface-accent: #f1f6fa;
+
+  --primary: var(--brand-navy);
+  --primary-hover: #294d78;
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--brand-blue);
+  --secondary-foreground: #ffffff;
+
+  --accent: var(--brand-gold);
+  --accent-soft: #f9edcf;
+
+  --success: var(--brand-green);
+  --success-soft: #edf6f1;
+
+  --muted-foreground: #607089;
   --border: #dce5ee;
-  --muted: #607089;
+  --border-strong: #cbd8e3;
+
+  --focus-ring: #4f7cac;
+
+  /*
+   * Supporting semantic states.
+   * These are starting values and should be contrast-tested in context.
+   */
+  --destructive: #b54747;
+  --destructive-soft: #fbeaea;
+  --warning: #9a6518;
+  --warning-soft: #fff3d6;
+  --disabled: #a8b2bf;
+  --disabled-surface: #edf1f5;
+
+  /*
+   * Shared shape and elevation values.
+   */
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+
+  --shadow-card: 0 12px 35px rgb(43 67 89 / 0.06);
+  --shadow-elevated: 0 24px 60px rgb(42 68 92 / 0.09);
+  --shadow-floating: 0 30px 80px rgb(42 68 92 / 0.16);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-surface-accent: var(--surface-accent);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-focus-ring: var(--focus-ring);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-disabled: var(--disabled);
+  --color-disabled-surface: var(--disabled-surface);
+
   --font-sans: var(--font-geist-sans);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-elevated: var(--shadow-elevated);
+  --shadow-floating: var(--shadow-floating);
 }
 
 * {
@@ -46,7 +135,34 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
 ::selection {
   background: #dcecf8;
-  color: #1e3a5f;
+  color: var(--brand-navy);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

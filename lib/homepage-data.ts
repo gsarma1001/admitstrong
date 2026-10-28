@@ -1,4 +1,4 @@
-﻿import type { FeatureIconType } from "@/components/ui/feature-icon";
+import type { FeatureIconType } from "@/components/ui/feature-icon";
 
 type Feature = {
   title: string;

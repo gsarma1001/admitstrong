@@ -1,4 +1,4 @@
-﻿export type FeatureIconType =
+export type FeatureIconType =
   | "profile"
   | "compass"
   | "roadmap"

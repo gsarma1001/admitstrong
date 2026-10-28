@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/container";
 const navigationItems = [
   { label: "Home", href: "/" },
   { label: "Admissions Brief", href: "/#admissions-brief" },
+  { label: "Contact", href: "/contact" },
   { label: "Pricing", href: "/pricing" },
 ];
 

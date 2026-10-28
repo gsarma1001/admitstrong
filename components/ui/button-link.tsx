@@ -1,4 +1,4 @@
-﻿import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
 type ButtonLinkVariant = "primary" | "secondary" | "inverse";
 type ButtonLinkSize = "default" | "large";
