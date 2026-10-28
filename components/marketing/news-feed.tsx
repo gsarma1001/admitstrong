@@ -20,25 +20,26 @@ function formatDate(value?: string) {
 export function NewsFeed() {
   return (
     <section
-      id="latest-updates"
-      aria-label="Latest college admissions and education updates"
+      id="admissions-brief"
+      aria-label="Admissions and opportunity brief"
       className="border-t border-border bg-surface-muted/40"
     >
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
             <p className="text-sm font-medium uppercase tracking-[0.12em] text-secondary">
-              Latest updates
+              Admissions &amp; Opportunity Brief
             </p>
 
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-[#173452] sm:text-4xl">
-              College Admissions &amp; Education Updates
+              The latest on college admissions, testing, and aid
             </h2>
 
             <p className="mt-4 text-lg leading-8 text-muted-foreground">
-              Stay informed with important updates on college admissions,
-              standardized testing, scholarships, and high school education—all
-              in one place.
+              Follow the admissions signals that matter most across U.S. colleges,
+              including updates from the College Board, SAT and ACT, scholarship
+              and grant opportunities, and practical guidance for families planning
+              the next step.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2">

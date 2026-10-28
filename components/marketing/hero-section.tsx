@@ -48,10 +48,6 @@ export function HeroSection() {
                 →
               </span>
             </ButtonLink>
-
-            <ButtonLink href="/contact" variant="secondary" size="large">
-              Get in Touch
-            </ButtonLink>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted-foreground">

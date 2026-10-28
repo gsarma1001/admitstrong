@@ -252,7 +252,7 @@ export default function Home() {
             goals, strengths, interests, and aspirations.
           </p>
           <a
-            href="/contact"
+            href="/login"
             className="mt-9 inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 font-semibold text-[#1e3a5f] transition hover:-translate-y-0.5 hover:bg-[#f3f7fa]"
           >
             Build Your Personalized Roadmap

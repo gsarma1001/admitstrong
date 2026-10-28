@@ -3,10 +3,9 @@ import { Container } from "@/components/ui/container";
 
 const footerLinks = [
   { label: "Home", href: "/" },
-  { label: "Latest Updates", href: "/#latest-updates" },
-  { label: "Login", href: "/login" },
+  { label: "Admissions Brief", href: "/#admissions-brief" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Contact", href: "/contact" },
+  { label: "Login", href: "/login" },
 ];
 
 export function SiteFooter() {

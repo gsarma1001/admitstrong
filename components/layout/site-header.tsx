@@ -4,10 +4,8 @@ import { Container } from "@/components/ui/container";
 
 const navigationItems = [
   { label: "Home", href: "/" },
-  { label: "Latest Updates", href: "/#latest-updates" },
-  { label: "Login", href: "/login" },
+  { label: "Admissions Brief", href: "/#admissions-brief" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Contact", href: "/contact" },
 ];
 
 export function SiteHeader() {
@@ -41,7 +39,6 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-4">
           <ButtonLink href="/login" variant="secondary">Log In</ButtonLink>
-          <ButtonLink href="/contact">Get in Touch</ButtonLink>
         </div>
       </Container>
     </header>

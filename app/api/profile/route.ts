@@ -13,7 +13,10 @@ export async function POST(request: Request) {
 
     if (!client) {
       return NextResponse.json(
-        { error: "Supabase is not configured. Add env values for NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, and SUPABASE_SERVICE_ROLE_KEY." },
+        {
+          error:
+            "Supabase is not configured. Add env values for NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY, and SUPABASE_SERVICE_ROLE_KEY.",
+        },
         { status: 503 },
       );
     }
