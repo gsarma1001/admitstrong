@@ -1,14 +1,13 @@
-AGENTS.md
+# AdmitStrong AI Agent Instructions
 
-Purpose
-
+## Purpose
 This file provides operating instructions for AI coding agents working in the AdmitStrong repository.
 
 AdmitStrong is an AI-powered college and career guidance platform. It is intended to help students and families understand what to do next, why it matters, and how to navigate the journey from middle school through college admissions and beyond.
 
 Agents must optimize for product value, safety, explainability, maintainability, and founder understanding—not merely speed or code volume.
 
-1. Read Before Changing Code
+## 1. Read Before Changing Code
 
 Before beginning a task, review the relevant project documents:
 
@@ -36,7 +35,7 @@ recommend the smallest reasonable decision,
 
 ask for founder approval when the decision changes product scope, architecture, privacy posture, or cost.
 
-2. Product North Star
+## 2. Product North Star
 
 The primary product outcome is:
 
@@ -56,7 +55,7 @@ how success can be observed.
 
 Do not build features only because they are technically impressive or use AI.
 
-3. User Groups
+## 3. User Groups
 
 Primary users:
 
@@ -78,7 +77,7 @@ graduate-school applicants.
 
 Do not optimize future personas at the expense of the current MVP unless explicitly requested.
 
-4. Product Principles
+## 4. Product Principles
 
 Every change should support these principles:
 
@@ -106,7 +105,7 @@ Important recommendations should explain both what is suggested and why.
 
 Do not imply that college admission is guaranteed or fully predictable.
 
-5. Current MVP Scope
+## 5. Current MVP Scope
 
 Unless the task says otherwise, prioritize the Phase 1 MVP:
 
@@ -128,7 +127,7 @@ basic reminders and progress tracking.
 
 Features such as mobile apps, counselor dashboards, graduate-school guidance, international expansion, advanced essay generation, and broad agentic automation are future scope unless explicitly approved.
 
-6. Technology Constraints
+## 6. Technology Constraints
 
 Preferred stack:
 
@@ -162,7 +161,7 @@ receiving approval.
 
 Prefer platform capabilities and small dependencies over large abstractions.
 
-7. Working Style
+## 7. Working Style
 
 For each task:
 
@@ -184,7 +183,7 @@ Do not perform broad refactors during a feature task unless required for correct
 
 Do not overwrite founder-authored content or decisions without calling attention to the change.
 
-8. Founder Learning and Transparency
+## 8. Founder Learning and Transparency
 
 The founder is building technical fluency while creating the company.
 
@@ -206,7 +205,7 @@ do not claim tests passed unless they were actually run.
 
 When presenting multiple options, recommend one and state the tradeoff.
 
-9. TypeScript and Code Quality
+## 9. TypeScript and Code Quality
 
 Use TypeScript for application code.
 
@@ -230,7 +229,7 @@ Remove dead code rather than commenting it out.
 
 Do not create placeholder systems that appear production-ready but are not.
 
-10. Next.js and React Guidance
+## 10. Next.js and React Guidance
 
 Prefer Server Components by default.
 
@@ -252,7 +251,7 @@ Use semantic HTML and accessible form controls.
 
 Build responsive behavior with each feature.
 
-11. UI and Content Guidance
+## 11. UI and Content Guidance
 
 The product should feel:
 
@@ -294,7 +293,7 @@ Compare Colleges
 
 Do not use manipulative urgency.
 
-12. Student Data and Privacy
+## 12. Student Data and Privacy
 
 Assume student data may belong to minors.
 
@@ -324,7 +323,7 @@ Never place API secrets, service-role keys, access tokens, or private student re
 
 Flag any requested implementation that could expose student data.
 
-13. Authentication and Authorization
+## 13. Authentication and Authorization
 
 Authentication alone is not authorization.
 
@@ -342,7 +341,7 @@ test cross-account access denial.
 
 Never rely only on hiding UI elements to protect data.
 
-14. AI and Recommendation Safety
+## 14. AI and Recommendation Safety
 
 AI output must be treated as untrusted structured or unstructured input.
 
@@ -382,7 +381,7 @@ when the recommendation was generated.
 
 Do not send entire student records to an AI model when only a subset is needed.
 
-15. College, Cost, and Opportunity Data
+## 15. College, Cost, and Opportunity Data
 
 College admissions data changes over time.
 
@@ -408,7 +407,7 @@ avoid ranking students or institutions using unexplained formulas.
 
 Do not scrape or integrate a data source without considering its license and terms.
 
-16. Transcript and File Handling
+## 16. Transcript and File Handling
 
 Uploaded transcripts may contain highly sensitive personal information.
 
@@ -432,7 +431,7 @@ never silently treat uncertain extraction as fact.
 
 Do not retain raw files indefinitely without an explicit product and privacy decision.
 
-17. Testing and Validation
+## 17. Testing and Validation
 
 Before declaring a task complete, run the relevant available checks:
 
@@ -487,7 +486,7 @@ unsafe or inappropriate recommendations.
 
 Report the checks actually run and their outcomes.
 
-18. Documentation Requirements
+## 18. Documentation Requirements
 
 Update documentation when changing:
 
@@ -511,7 +510,7 @@ product decisions.
 
 Do not let implementation and documentation drift silently.
 
-19. Git Safety
+## 19. Git Safety
 
 Never force-push unless explicitly authorized.
 
@@ -527,7 +526,7 @@ Use descriptive commit messages.
 
 Show git status before recommending a commit when repository state is uncertain.
 
-20. Dependency Safety
+## 20. Dependency Safety
 
 Before adding a dependency:
 
@@ -543,7 +542,7 @@ explain why it is needed.
 
 Do not add packages for trivial utility functions.
 
-21. Definition of Done
+## 21. Definition of Done
 
 A task is complete only when:
 
@@ -567,7 +566,7 @@ no secrets or real personal data are present,
 
 limitations and follow-up work are stated.
 
-22. Expected Final Report
+## 22. Expected Final Report
 
 After completing a coding task, report:
 
@@ -591,7 +590,7 @@ Recommended Next Step
 
 Give one highest-priority next action.
 
-23. Stop and Ask for Approval When
+## 23. Stop and Ask for Approval When
 
 Stop before proceeding if a task would:
 

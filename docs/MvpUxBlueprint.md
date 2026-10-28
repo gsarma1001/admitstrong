@@ -17,6 +17,7 @@
 ### 1. Document Metadata and Governance
 
 1.1 Purpose
+The purpose of this document 
 1.2 Scope
 1.3 Intended audience
 1.4 Related documents

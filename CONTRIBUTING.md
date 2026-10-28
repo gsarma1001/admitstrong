@@ -1,4 +1,14 @@
-Contributing to AdmitStrong
+# Contributing to AdmitStrong
+
+Before making a material product, UX, brand, or architecture change, review:
+
+- `docs/Vision.md`
+- `docs/ProductRequirements.md`
+- `docs/Architecture.md`
+- `docs/Founders.md`
+- `docs/ProductPrinciples.md`
+- `docs/BrandGuide.md`
+- `docs/MvpUxBlueprint.md` when available
 
 Thank you for contributing to AdmitStrong.
 
